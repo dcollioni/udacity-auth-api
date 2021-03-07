@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: udacity-auth-api
+  labels:
+    app: udacity-auth-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: udacity-auth-api
+  template:
+    metadata:
+      labels:
+        app: udacity-auth-api
+    spec:
+      containers:
+      - name: udacity-auth-api
+        image: dcollioni/udacity-auth-api
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "1024Mi"
+            cpu: "500m"
+        envFrom:
+          - secretRef:
+              name: udacity-auth-api-secret
+        ports:
+        - containerPort: 8080
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 3
+          periodSeconds: 3
