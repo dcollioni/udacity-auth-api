@@ -6,6 +6,10 @@ node_js:
 services:
   - docker
 
+# Environment variables
+env:
+  - PACKAGE_VERSION="0.0.1"
+
 # Pre-testing installs
 install:
   - npm install
@@ -17,9 +21,9 @@ before_script:
 script:
   - docker --version
   - docker build -t udacity-auth-api .
-  - docker tag udacity-auth-api dcollioni/udacity-auth-api:latest
+  - docker tag udacity-auth-api dcollioni/udacity-auth-api:$PACKAGE_VERSION
 
 # Tasks to perform after the process is successful. Formatting the Docker username and password as below enables you to programmatically log in without having the password exposed in logs.
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push dcollioni/udacity-auth-api
+  - docker push dcollioni/udacity-auth-api:$PACKAGE_VERSION
