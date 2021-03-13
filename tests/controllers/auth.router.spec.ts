@@ -42,16 +42,16 @@ describe('routes', () => {
       })
     })
     describe('given no authorization header', () => {
-      it('should return status 400', async () => {
+      it('should return status 401', async () => {
         const response = await request(app()).get(path)
-        expect(response.status).toEqual(400)
+        expect(response.status).toEqual(401)
       })
     })
     describe('given an incorrectly formatted authorization header', () => {
       const authorization = 'bearer_token'
-      it('should return status 400', async () => {
+      it('should return status 401', async () => {
         const response = await request(app()).get(path).set('authorization', authorization)
-        expect(response.status).toEqual(400)
+        expect(response.status).toEqual(401)
       })
     })
   })

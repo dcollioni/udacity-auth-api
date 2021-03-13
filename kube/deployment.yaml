@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: udacity-auth-api
-        image: dcollioni/udacity-auth-api:0.0.2
+        image: dcollioni/udacity-auth-api:0.0.1
         imagePullPolicy: Always
         resources:
           requests:

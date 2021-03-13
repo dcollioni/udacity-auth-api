@@ -20,7 +20,7 @@ router.get('/', async (req: Request, res: Response) => {
     }
   } catch (err) {
     logger.error('failed to get token', err)
-    return res.status(400).send(err.message)
+    return res.status(401).send(err.message)
   }
 })
 
